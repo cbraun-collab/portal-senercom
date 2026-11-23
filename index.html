@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal SENERCOM</title>
+<meta name="theme-color" content="#003B49">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icono-192.png">
+<link rel="apple-touch-icon" href="icono-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#003B49; --teal-2:#0b5466; --naranja:#CF4520; --gris:#4A6068;
+    --fondo:#f3f5f6; --tarjeta:#ffffff; --borde:#e1e6e8; --texto:#14262c; --suave:#5d7178;
+    --verde:#1f8a5b; --ambar:#b7791f; --azul:#2563a8; --lila:#6b4fa0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--fondo);color:var(--texto);min-height:100vh}
+  .mono{font-family:'JetBrains Mono',monospace}
+
+  header{background:var(--teal);color:#fff;padding:18px 16px 22px;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border:28px solid rgba(207,69,32,.18);transform:rotate(45deg);border-radius:18px}
+  .head-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:16px;position:relative;z-index:1;flex-wrap:wrap}
+  .logo-chip{background:#fff;border-radius:10px;padding:6px 10px;display:flex}
+  .logo-chip img{height:44px;width:auto;display:block}
+  .head-tit h1{margin:0;font-size:20px;font-weight:600;letter-spacing:.2px}
+  .head-tit p{margin:2px 0 0;font-size:13px;opacity:.8}
+  .iso{margin-left:auto;font-size:11px;opacity:.75;text-align:right}
+
+  .barra{max-width:1120px;margin:-14px auto 0;padding:0 16px;position:relative;z-index:2}
+  .buscar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--borde);border-radius:12px;padding:10px 14px;box-shadow:0 4px 14px rgba(0,59,73,.08)}
+  .buscar input{border:none;outline:none;font:inherit;font-size:15px;flex:1;min-width:0;background:transparent;color:var(--texto)}
+  .filtros{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .chip{border:1px solid var(--borde);background:#fff;color:var(--gris);border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+  .chip.activo{background:var(--teal);border-color:var(--teal);color:#fff}
+
+  main{max-width:1120px;margin:0 auto;padding:18px 16px 40px}
+  .area{margin-top:22px}
+  .area-tit{display:flex;align-items:baseline;gap:10px;margin:0 0 10px;border-bottom:2px solid var(--borde);padding-bottom:6px}
+  .area-tit h2{margin:0;font-size:17px;color:var(--teal);font-weight:600}
+  .area-tit .dot{width:10px;height:10px;border-radius:3px;background:var(--naranja);align-self:center}
+  .area-tit span{font-size:12px;color:var(--suave)}
+  .area.privada{background:#eaf1f3;border:1px solid #cfdde1;border-radius:16px;padding:14px}
+  .area.privada .area-tit{border-bottom-color:#cfdde1}
+  .solo{margin-left:auto;font-style:normal;font-size:11px;font-weight:600;color:#fff;background:var(--teal);border-radius:999px;padding:3px 10px;white-space:nowrap}
+  .area-tit{flex-wrap:wrap}
+  .grilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+
+  .app{background:var(--tarjeta);border:1px solid var(--borde);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;transition:transform .12s,box-shadow .12s,border-color .12s;position:relative}
+  a.app:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,59,73,.12);border-color:var(--teal-2)}
+  .app.sin-link{background:#fafbfb;border-style:dashed}
+  .app-top{display:flex;gap:10px;align-items:center}
+  .ico{width:40px;height:40px;border-radius:10px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+  .app.sin-link .ico{background:#c9d3d6}
+  .app h3{margin:0;font-size:15px;font-weight:600;line-height:1.2}
+  .codigo{font-size:10.5px;color:var(--suave)}
+  .desc{font-size:13px;color:var(--suave);margin:0;line-height:1.35;flex:1}
+  .pie{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .estado{font-size:11px;font-weight:600;border-radius:999px;padding:3px 9px;color:#fff}
+  .e-uso{background:var(--verde)} .e-blanca{background:var(--ambar)} .e-prueba{background:var(--azul)}
+  .e-desarrollo{background:var(--lila)} .e-proximo{background:#8a9a9f} .e-auto{background:var(--gris)}
+  .ir{font-size:12px;color:var(--naranja);font-weight:600}
+  .nota{font-size:11.5px;color:var(--naranja);background:#fdf1ec;border-radius:8px;padding:6px 8px;margin:0}
+  .vacio{color:var(--suave);font-size:14px;padding:30px 0;text-align:center}
+  footer{max-width:1120px;margin:0 auto;padding:0 16px 30px;font-size:11.5px;color:var(--suave);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  @media (max-width:520px){ .iso{margin-left:0;text-align:left;width:100%} .logo-chip img{height:36px} .head-tit h1{font-size:18px} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="logo-chip"><img src="logo.png" alt="SENERCOM"></div>
+    <div class="head-tit">
+      <h1>Portal SENERCOM</h1>
+      <p>Todas las aplicaciones de la empresa en un solo lugar</p>
+    </div>
+    <div class="iso mono">Código ISO por asignar · REV 0 · borrador</div>
+  </div>
+</header>
+
+<div class="barra">
+  <label class="buscar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A6068" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Buscar aplicación, formato ISO o área…" autocomplete="off">
+  </label>
+  <div class="filtros" id="filtros"></div>
+</div>
+
+<main id="contenido"></main>
+
+<footer>
+  <span>Constructora e Ingeniería Senercom Ltda.</span>
+  <span class="mono" id="resumen"></span>
+</footer>
+
+<script>
+/* =====================================================================
+   CATÁLOGO DE APLICACIONES
+   Única lista del portal. Para agregar o mover una app se edita solo aquí.
+   Debe coincidir con MAPA.md (SISTEMAS SENERCOM (RESTRINGIDO)).
+   estado: uso | blanca | prueba | desarrollo | proximo | auto
+   ===================================================================== */
+const GH = 'https://cbraun-collab.github.io/';
+
+const AREAS = [
+  { id:'gerencia',   nombre:'Gerencia', sub:'Informe ISO de gerencia: FODA, PESTEL, riesgos y oportunidades', privada:'Acceso exclusivo · Carlos Braun' },
+  { id:'ingenieria', nombre:'Ingeniería y Obras', sub:'Gestión comercial (licitaciones y presupuestos) y control de obras' },
+  { id:'compras',    nombre:'Compras y Bodega',   sub:'Requisiciones, órdenes de compra, inventario y EPP' },
+  { id:'prevencion', nombre:'Prevención de Riesgos (SSO)', sub:'Charlas, capacitaciones y vehículos', privada:'Información sensible restringida' },
+  { id:'admin',      nombre:'Administración y Personas', sub:'Rendiciones, asistencia y comunicaciones', privada:'Acceso restringido' },
+  { id:'calidad',    nombre:'Calidad · Sistema de Gestión Integrado', sub:'Hallazgos, no conformidades y mejora continua' },
+];
+
+const APPS = [
+  // ── Ingeniería y Obras
+  { area:'ingenieria', nombre:'Generador de Presupuestos', ico:'GP', codigo:'FOR-COM-002 / 003 / 004',
+    desc:'Código de obra, carpetas, cubicación, carta oferta, validación y envío en PDF.',
+    url:'', estado:'uso', nota:'Falta el link de Cloud Run' },
+  { area:'ingenieria', nombre:'Control de Obras', ico:'CO', codigo:'',
+    desc:'Avance de obra. Absorberá Control RDI/EDI y No Conformidades.',
+    url:'', estado:'proximo' },
+  { area:'ingenieria', nombre:'Control RDI / EDI', ico:'RE', codigo:'PWA-COM-005',
+    desc:'Requerimientos y entregas de información con doble firma por correo.',
+    url:GH+'control-rdi-edi/', estado:'prueba', nota:'Pasará a Control de Obras' },
+  { area:'ingenieria', nombre:'Explorador de Licitaciones', ico:'EL', codigo:'',
+    desc:'Búsqueda y revisión de licitaciones públicas que nos sirvan.',
+    url:GH+'Busqueda-licitaciones/', estado:'uso' },
+
+  // ── Compras y Bodega
+  { area:'compras', nombre:'Control Compras', ico:'CC', codigo:'PWA-ADQ-002',
+    desc:'Requisición, revisión de bodega, comparativo de cotizaciones y órdenes de compra.',
+    url:GH+'control-compras/', estado:'prueba' },
+  { area:'compras', nombre:'Inventario Bodega', ico:'IB', codigo:'',
+    desc:'Stock, conteo por QR y foto con IA, recepciones y devoluciones.',
+    url:GH+'inventario-bodega/', estado:'uso' },
+  { area:'compras', nombre:'Entrega de EPP', ico:'EP', codigo:'FOR-ADQ-010 (por revisar)',
+    desc:'Entrega de EPP como salida de bodega. El registro firmado queda en Prevención, por trabajador.',
+    url:GH+'entrega-epp/', estado:'prueba' },
+
+  // ── Prevención
+  { area:'prevencion', nombre:'Charla Diaria', ico:'CD', codigo:'PWA-SSO-002',
+    desc:'Registro de asistencia a la charla diaria de seguridad.',
+    url:GH+'charla-diaria/', estado:'uso' },
+  { area:'prevencion', nombre:'Capacitaciones SSO', ico:'CA', codigo:'FOR-SSO-001 a 016',
+    desc:'Consolidado de capacitaciones de seguridad y salud ocupacional.',
+    url:GH+'Capacitaciones-SSO/', estado:'uso' },
+  { area:'prevencion', nombre:'Checklist Vehículos', ico:'CV', codigo:'FOR-SSO-025',
+    desc:'Chequeo mensual de vehículos y registro de daños.',
+    url:GH+'checklist-vehiculos/', estado:'uso' },
+
+  // ── Administración
+  { area:'admin', nombre:'Rendición de Boletas', ico:'RB', codigo:'',
+    desc:'Rendición de boletas y facturas con lectura automática por IA.',
+    url:GH+'rendicion-boletas/', estado:'uso' },
+  { area:'admin', nombre:'Control Asistencia a Actividades', ico:'AS', codigo:'FOR-RHH-014',
+    desc:'Asistencia a actividades de la empresa, en base a GeoVictoria. Uso real desde el 01-12-2026.',
+    url:GH+'control-asistencia/', estado:'blanca' },
+  { area:'admin', nombre:'Registro de Correos', ico:'RC', codigo:'',
+    desc:'Guarda y registra los correos en Google Sheets para su control.',
+    url:'', estado:'auto', nota:'Funciona sola, sin pantalla' },
+  { area:'admin', nombre:'Saludos de Cumpleaños', ico:'SC', codigo:'',
+    desc:'Envía el saludo de cumpleaños cada mañana a las 07:58.',
+    url:'', estado:'auto', nota:'Funciona sola, sin pantalla' },
+
+  // ── Gerencia (acceso exclusivo de Carlos Braun)
+  { area:'gerencia', nombre:'Gestión Integrada ISO', ico:'GI', codigo:'DOC-SGC-003 / 006 / 007',
+    desc:'Informe de gerencia automatizado: cruza FODA, PESTEL, riesgos y oportunidades y las demás planillas ISO.',
+    url:GH+'pwa-gestion-iso/', estado:'prueba' },
+
+  // ── Calidad
+  { area:'calidad', nombre:'No Conformidades y Hallazgos', ico:'NC', codigo:'',
+    desc:'Oportunidades de mejora, hallazgos y no conformidades en terreno.',
+    url:GH+'Oportunidades-No-conf-det-hallazgos-Obras/', estado:'prueba', nota:'Pasará a Control de Obras' },
+];
+
+const ESTADOS = {
+  uso:{t:'En uso',c:'e-uso'}, blanca:{t:'Marcha blanca',c:'e-blanca'}, prueba:{t:'En prueba',c:'e-prueba'},
+  desarrollo:{t:'En desarrollo',c:'e-desarrollo'}, proximo:{t:'Próximamente',c:'e-proximo'}, auto:{t:'Automática',c:'e-auto'}
+};
+
+let areaActiva = 'todas';
+const norm = s => (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const esc = s => String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function pintarFiltros(){
+  const f = document.getElementById('filtros');
+  const items = [{id:'todas',nombre:'Todas'}, ...AREAS];
+  f.innerHTML = items.map(a =>
+    `<button class="chip ${a.id===areaActiva?'activo':''}" data-area="${a.id}">${esc(a.id==='todas'?'Todas':a.nombre.split(' ·')[0].split(' (')[0])}</button>`).join('');
+  f.querySelectorAll('.chip').forEach(b => b.onclick = () => { areaActiva = b.dataset.area; pintarFiltros(); pintar(); });
+}
+
+function tarjeta(a){
+  const e = ESTADOS[a.estado] || ESTADOS.prueba;
+  const cuerpo = `
+    <div class="app-top">
+      <div class="ico mono">${esc(a.ico)}</div>
+      <div><h3>${esc(a.nombre)}</h3>${a.codigo?`<div class="codigo mono">${esc(a.codigo)}</div>`:''}</div>
+    </div>
+    <p class="desc">${esc(a.desc)}</p>
+    ${a.nota?`<p class="nota">${esc(a.nota)}</p>`:''}
+    <div class="pie"><span class="estado ${e.c}">${e.t}</span>${a.url?'<span class="ir">Abrir →</span>':''}</div>`;
+  return a.url
+    ? `<a class="app" href="${esc(a.url)}" target="_blank" rel="noopener">${cuerpo}</a>`
+    : `<div class="app sin-link">${cuerpo}</div>`;
+}
+
+function pintar(){
+  const q = norm(document.getElementById('q').value.trim());
+  const cont = document.getElementById('contenido');
+  let html = '', total = 0;
+  AREAS.filter(ar => areaActiva==='todas' || ar.id===areaActiva).forEach(ar => {
+    const lista = APPS.filter(a => a.area===ar.id &&
+      (!q || norm(a.nombre+' '+a.desc+' '+a.codigo+' '+ar.nombre).includes(q)));
+    if (!lista.length) return;
+    total += lista.length;
+    html += `<section class="area ${ar.privada?'privada':''}"><div class="area-tit"><i class="dot"></i><h2>${ar.privada?'🔒 ':''}${esc(ar.nombre)}</h2><span>${esc(ar.sub)}</span>${ar.privada?`<em class="solo">${esc(ar.privada)}</em>`:''}</div>
+      <div class="grilla">${lista.map(tarjeta).join('')}</div></section>`;
+  });
+  cont.innerHTML = html || '<p class="vacio">No hay aplicaciones que coincidan con la búsqueda.</p>';
+  const enUso = APPS.filter(a => a.estado==='uso').length;
+  document.getElementById('resumen').textContent = `${APPS.length} aplicaciones · ${enUso} en uso`;
+}
+
+document.getElementById('q').addEventListener('input', pintar);
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+pintarFiltros();
+pintar();
+</script>
+</body>
+</html>
