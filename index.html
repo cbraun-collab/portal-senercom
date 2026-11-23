@@ -107,11 +107,12 @@
 const GH = 'https://cbraun-collab.github.io/';
 
 const AREAS = [
+  { id:'general',    nombre:'Uso general', sub:'Apps que usa todo el equipo: compras, ingeniería, gerencia y administración' },
   { id:'gerencia',   nombre:'Gerencia', sub:'Informe ISO de gerencia: FODA, PESTEL, riesgos y oportunidades', privada:'Acceso exclusivo · Carlos Braun' },
   { id:'ingenieria', nombre:'Ingeniería y Obras', sub:'Gestión comercial (licitaciones y presupuestos) y control de obras' },
   { id:'compras',    nombre:'Compras y Bodega',   sub:'Requisiciones, órdenes de compra, inventario y EPP' },
   { id:'prevencion', nombre:'Prevención de Riesgos (SSO)', sub:'Charlas, capacitaciones y vehículos', privada:'Información sensible restringida' },
-  { id:'admin',      nombre:'Administración y Personas', sub:'Rendiciones, asistencia y comunicaciones', privada:'Acceso restringido' },
+  { id:'admin',      nombre:'Administración y Personas', sub:'Asistencia, comunicaciones y revisión de rendiciones', privada:'Acceso restringido' },
   { id:'calidad',    nombre:'Calidad · Sistema de Gestión Integrado', sub:'Hallazgos, no conformidades y mejora continua' },
 ];
 
@@ -153,8 +154,8 @@ const APPS = [
     url:GH+'checklist-vehiculos/', estado:'uso' },
 
   // ── Administración
-  { area:'admin', nombre:'Rendición de Boletas', ico:'RB', codigo:'',
-    desc:'Rendición de boletas y facturas con lectura automática por IA.',
+  { area:'general', nombre:'Rendición de Boletas', ico:'RB', codigo:'',
+    desc:'Rendición de boletas y facturas con lectura automática por IA. La usa todo el equipo; la revisión la hace Administración.',
     url:GH+'rendicion-boletas/', estado:'uso' },
   { area:'admin', nombre:'Control Asistencia a Actividades', ico:'AS', codigo:'FOR-RHH-014',
     desc:'Asistencia a actividades de la empresa, en base a GeoVictoria. Uso real desde el 01-12-2026.',
