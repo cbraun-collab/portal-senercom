@@ -67,20 +67,54 @@
   .vacio{color:var(--suave);font-size:14px;padding:30px 0;text-align:center}
   footer{max-width:1120px;margin:0 auto;padding:0 16px 30px;font-size:11.5px;color:var(--suave);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
   @media (max-width:520px){ .iso{margin-left:0;text-align:left;width:100%} .logo-chip img{height:36px} .head-tit h1{font-size:18px} }
+
+  /* ===== Estilo tipo Defontana (aprobado por Carlos 25-11-2026) ===== */
+  :root{--durazno:#FBC3AE;--durazno-2:#FDE3D8;--fondo:#F3F4F6;--borde:#E5E7EB;--suave:#6B7280;}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif}
+  header{background:#fff;color:var(--teal);border-bottom:1px solid var(--borde);padding:10px 16px}
+  header::after{display:none}
+  .logo-chip{background:none;padding:0}
+  .logo-chip img{height:36px}
+  .head-tit h1{font-size:17px;color:var(--teal)}
+  .head-tit h1 b{color:var(--naranja)}
+  .head-tit p{color:var(--suave);opacity:1}
+  .iso{color:var(--suave)}
+  .bienvenida{max-width:1120px;margin:16px auto 0;padding:0 16px}
+  .bienvenida div{background:linear-gradient(90deg,var(--durazno-2),var(--durazno));border-radius:14px;padding:18px 22px;color:var(--teal)}
+  .bienvenida h2{margin:0;font-size:20px}
+  .bienvenida h2 b{color:var(--naranja)}
+  .bienvenida p{margin:4px 0 0;font-size:13px;color:#7c2d12}
+  .barra{margin:14px auto 0}
+  .buscar{border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .chip{border-radius:16px}
+  .chip.activo{background:var(--naranja);border-color:var(--naranja)}
+  .area-tit h2{color:var(--teal)}
+  .area-tit{border-bottom:1px solid var(--borde)}
+  .area.privada{background:#fff;border:1px solid var(--borde)}
+  .solo{background:var(--naranja)}
+  .app{border:none;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  a.app:hover{box-shadow:0 8px 20px rgba(0,0,0,.10);border-color:transparent}
+  .ico{background:var(--durazno-2);color:var(--naranja);border-radius:12px}
+  .app.sin-link .ico{background:#E5E7EB;color:#9CA3AF}
+  .estado{border-radius:12px;font-weight:600}
+  .e-uso{background:#DCFCE7;color:#15803D} .e-blanca{background:#FEF3C7;color:#B45309} .e-prueba{background:#DBEAFE;color:#1D4ED8}
+  .e-desarrollo{background:#EDE9FE;color:#6D28D9} .e-proximo{background:#E5E7EB;color:#4B5563} .e-auto{background:#E5E7EB;color:#374151}
 </style>
 </head>
 <body>
 
 <header>
   <div class="head-in">
-    <div class="logo-chip"><img src="logo.png" alt="SENERCOM"></div>
+    <div class="logo-chip"><img src="logo-app.png" alt="SENERCOM"></div>
     <div class="head-tit">
-      <h1>Portal SENERCOM</h1>
+      <h1>SENER<b>COM</b> · Portal</h1>
       <p>Todas las aplicaciones de la empresa en un solo lugar</p>
     </div>
     <div class="iso mono">Código ISO por asignar · REV 0 · borrador</div>
   </div>
 </header>
+
+<div class="bienvenida"><div><h2>¡Bienvenid@ al portal <b>SENERCOM</b>!</h2><p>Todas las aplicaciones de la empresa en un solo lugar. Busca por nombre, formato ISO o área.</p></div></div>
 
 <div class="barra">
   <label class="buscar">
